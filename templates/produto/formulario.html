@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo_conteudo %} Inserir Nova Categoria {% endblock titulo_conteudo %}
+
+{% block conteudo %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.nome.label_tag }}
+
+        {{ form.nome }}
+    </div>
+    <div class="form-group">
+        {{ form.ordem.label_tag }}     
+        {{ form.ordem }}
+    </div>
+    <button class="btn btn-primary" type="submit">Enviar</button>
+</form>
+
+{% endblock conteudo %}
