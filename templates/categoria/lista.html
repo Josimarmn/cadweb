@@ -27,7 +27,7 @@
             <td>{{item.preco}}</td>
             <td>
                 <button class="btn btn-info text-white btn-sm me-1">Detalhes</button>
-                <button class="btn btn-warning btn-sm me-1">Alterar</button>
+                <button class="btn btn-warning btn-sm me-1" onclick="location'={% url "editar_categoria" item.id %}'">Alterar</button>
                 <button class="btn btn-danger btn-sm">Excluir</button>
 
             </td>
