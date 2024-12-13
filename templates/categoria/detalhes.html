@@ -7,8 +7,12 @@
 <form method="post">
     {% csrf_token %}
     <p>
+      <label for="id_item">ID:</label>
+      <input type="number" name="item" class="inteiro form-control" placeholder="" required id="id_item">
+    </p>
+    <p>
       <label for="id_nome">Nome:</label>
-      <input type="text" name="nome" class="form-control" placeholder="Nome" maxlength="100" required id="id_nome">
+      <input type="text" name="nome" class="form-control" placeholder="" maxlength="100" required id="id_nome">
     </p>
   
     <p>
