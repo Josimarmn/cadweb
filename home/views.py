@@ -59,3 +59,17 @@ def editar_categoria(request, id):
          form = CategoriaForm(instance=categoria)
     return render(request, 'categoria/formulario.html', {'form': form,})
 
+def remover_categoria(request, id):
+    form = CategoriaForm()
+    contexto = {
+        'form':form,
+    }
+    return render(request, 'categoria/formulario.html', contexto)
+
+def detalhes_categoria(request, id):
+    form = CategoriaForm()
+    contexto = {
+        'form':form,
+    }
+    return render(request, 'categoria/formulario.html', contexto)
+
