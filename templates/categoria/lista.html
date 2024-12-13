@@ -27,12 +27,9 @@
             <td> 10 </td>
             <td>{{item.ordem}}</td>
             <td>
-                <button class="btn btn-info text-white btn-sm me-1" onclick="location.href='{% url 'detalhes_categoria' item.id %}'">Detalhes</button>
-
-                <button class="btn btn-warning btn-sm me-1" onclick="location.href='{% url 'editar_categoria' item.id %}'">Alterar</button>
-
+                <button class="btn btn-info text-white btn-sm me-1 onclick="location.href'={% url 'detalhes_categoria' item.id %}'">Detalhes</button>
+                <button class="btn btn-warning btn-sm me-1 onclick="location'={% url "editar_categoria" item.id %}'">Alterar</button>
                 <button class="btn btn-danger btn-sm" onclick="location.href='{% url 'remover_categoria' item.id %}'">Excluir</button>
-
 
 
             </td>
