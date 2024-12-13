@@ -57,7 +57,7 @@ def editar_categoria(request, id):
             return redirect('categoria') # redireciona para a listagem
     else:
          form = CategoriaForm(instance=categoria)
-    return render(request, 'categoria/formulario.html', {'form': form,})
+    return render(request, 'categoria/editar.html', {'form': form,})
 
 def remover_categoria(request, id):
     form = CategoriaForm()
@@ -71,5 +71,5 @@ def detalhes_categoria(request, id):
     contexto = {
         'form':form,
     }
-    return render(request, 'categoria/formulario.html', contexto)
+    return render(request, 'categoria/detalhes.html', contexto)
 
