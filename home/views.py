@@ -65,18 +65,23 @@ def editar_categoria(request, id):
             messages.success(request, 'Operação realizada com Sucesso')
             lista = []
             lista.append(categoria) 
-            return render(request, 'categoria/lista.html', {'lista': lista})
+            return render(request, 'categoria/editar.html', {'lista': lista})
     else:
          form = CategoriaForm(instance=categoria)
-    return render(request, 'categoria/formulario.html', {'form': form,})
+    return render(request, 'categoria/editar.html', {'form': form,})
 
 
 def remover_categoria(request, id):
+
+    categoria = Categoria.objects.get(pk=id)
+    categoria.delete() 
+
+
     form = CategoriaForm()
-    contexto = {
-        'form':form,
-    }
-    return render(request, 'categoria/formulario.html', contexto)
+   # contexto = {
+    #    'form':form,
+    #}
+    return render(request, 'categoria/lista.html', {'form':form,})
 
 def detalhes_categoria(request, id):
     form = CategoriaForm()
