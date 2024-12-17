@@ -64,11 +64,24 @@ def editar_categoria(request, id):
     return render(request, 'categoria/formulario.html', {'form': form,})
 
 
-def remover_categoria(request, id):
+from django.contrib import messages
+from django.shortcuts import redirect
+from .models import Categoria
 
-    categoria = Categoria.objects.get(pk=id)    
-    categoria.delete() 
-    return redirect('categoria')
+def remover_categoria(request, id):
+    try:
+        # Tenta obter a categoria com o id fornecido
+        categoria = Categoria.objects.get(pk=id)
+        categoria.delete()  # Exclui a categoria encontrada
+        messages.success(request, 'Operação realizada com sucesso')  # Exibe mensagem de sucesso
+    except Categoria.DoesNotExist:
+        # Caso o registro não seja encontrado, exibe a mensagem de erro
+        messages.error(request, 'Registro não encontrado')
+    
+    return redirect('categoria')  # Redireciona para a listagem de categorias
+
+            
+
 
 def detalhes_categoria(request, id):
     categoria = Categoria.objects.get(pk=id)  
