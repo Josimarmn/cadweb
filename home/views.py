@@ -79,9 +79,7 @@ def remover_categoria(request, id):
         messages.error(request, 'Registro não encontrado')
     
     return redirect('categoria')  # Redireciona para a listagem de categorias
-
-            
-
+           
 
 def detalhes_categoria(request, id):
     categoria = Categoria.objects.get(pk=id)  
