@@ -4,32 +4,22 @@
 
 {% block conteudo %}
 
-<form method="post">
-    {% csrf_token %}
-    <p>
-      <label for="id_item">ID:</label>
-      <input type="number" name="item" class="inteiro form-control" placeholder="" required id="id_item">
-    </p>
-    <p>
-      <label for="id_nome">Descrição:</label>
-      <input type="text" name="nome" class="form-control" placeholder="" maxlength="100" required id="id_nome">
-    </p>
-  
-    <p>
-      <label for="id_estoque">Estoque:</label>
-      <input type="number" name="estoque" class="form-control" placeholder="" required id="id_estoque">
-    </p>
-
-    <p>
-      <label for="id_ordem">Valor:</label>
-      <input type="number" name="ordem" class="inteiro form-control" placeholder="" required id="id_ordem">
-    </p>
-
-    <p>
-      <!-- Renderiza cada campo do formulário com <p> tags -->
-        <a href="{% url 'categoria' %}" class="btn btn-primary">Voltar</a>
-       <!-- <button class="btn btn-primary" onclick="location.href='{% url 'categoria' %}'">Voltar</button>-->
-    </p>
-  </form>
+<table class="table table-bordered">
+  <tbody>
+      <tr>
+          <td>ID:</td>
+          <td>{{ categoria.id }}</td>
+      </tr>
+      <tr>
+          <td>Nome:</td>
+          <td>{{ categoria.nome }}</td>
+      </tr>
+      <tr>
+          <td>Ordem:</td>
+          <td>{{ categoria.ordem }}</td>
+      </tr>
+  </tbody>
+</table>
+<a href="{% url 'categoria' %}" class="btn btn-secondary">Voltar</a>
 
 {% endblock conteudo %}

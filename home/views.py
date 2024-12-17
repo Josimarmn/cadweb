@@ -41,12 +41,6 @@ def editar_produto(request, id):
     }
     return render(request, 'categoria/formulario.html', contexto)
 
-def excluir_produto(request, id):
-    form = CategoriaForm()
-    contexto = {
-        'form':form,
-    }
-    return render(request, 'categoria/formulario.html', contexto)
 
 def editar_categoria(request, id):
     try:
@@ -63,27 +57,22 @@ def editar_categoria(request, id):
         if form.is_valid():
             categoria = form.save() # save retorna o objeto salvo
             messages.success(request, 'Operação realizada com Sucesso')
-            lista = []
-            lista.append(categoria) 
-            return render(request, 'categoria/editar.html', {'lista': lista})
+            return redirect('categoria')
     else:
         form = CategoriaForm(instance=categoria)
-        return render(request, 'categoria/editar.html', {'form': form,})
+        
+    return render(request, 'categoria/formulario.html', {'form': form,})
 
 
 def remover_categoria(request, id):
 
     categoria = Categoria.objects.get(pk=id)    
-    form = CategoriaForm()
     categoria.delete() 
-    return render(request, 'categoria/lista.html', {'form':form,})
+    return redirect('categoria')
 
 def detalhes_categoria(request, id):
-    form = CategoriaForm()
-    contexto = {
-        'form':form,
-    }
-    return render(request, 'categoria/detalhes.html', contexto)
+    categoria = Categoria.objects.get(pk=id)  
+    return render(request, 'categoria/detalhes.html', {'categoria':categoria})
 
 def clean_nome(self):
     nome = self.cleaned_data.get('nome')
