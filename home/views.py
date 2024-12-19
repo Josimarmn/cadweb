@@ -27,20 +27,6 @@ def form_categoria(request):
     }
     return render(request, 'categoria/formulario.html', contexto)
 
-def detalhes_produto(request, id):
-    form = CategoriaForm()
-    contexto = {
-        'form':form,
-    }
-    return render(request, 'categoria/formulario.html', contexto)
-
-def editar_produto(request, id):
-    form = CategoriaForm()
-    contexto = {
-        'form':form,
-    }
-    return render(request, 'categoria/formulario.html', contexto)
-
 
 def editar_categoria(request, id):
     try:
