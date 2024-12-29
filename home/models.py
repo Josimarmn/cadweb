@@ -1,5 +1,6 @@
 import locale
 from django.db import models
+from datetime import date
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=100)
@@ -10,12 +11,11 @@ class Categoria(models.Model):
     
 class Cliente(models.Model):
     nome = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=15,verbose_name="C.P.F")
+    cpf = models.CharField(max_length=14,verbose_name="C.P.F")
     datanasc = models.DateField(verbose_name="Data de Nascimento")
 
-
-    def __str__(self):
-        return self.nome
+    class Meta:
+        db_table = 'home_cliente'
     
     @property
     def datanascimento(self):

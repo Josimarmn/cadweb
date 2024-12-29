@@ -92,6 +92,7 @@ def cliente(request):
     }
     return render(request, 'cliente/listacliente.html',contexto)
 
+
 def form_cliente(request):
     if request.method == 'POST':
        form = ClienteForm(request.POST) # instancia o modelo com os dados do form

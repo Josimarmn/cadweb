@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from datetime import date
 
 
 class CategoriaForm(forms.ModelForm):
