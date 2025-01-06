@@ -33,5 +33,11 @@ class ClienteForm(forms.ModelForm):
         if len(cpf) < 14:
             raise forms.ValidationError("O campo cpf deve ser conter 11 dígitos.")
         return cpf
+    
+    def clean_datanasc(self):
+        datanasc = self.cleaned_data.get('datanasc')
+        if datanasc > date.today():
+            raise forms.ValidationError("O campo data deve ser menor que a data atual.")
+        return datanasc
 
 
