@@ -147,14 +147,3 @@ def remover_cliente(request, id):
     return redirect('cliente')  # Redireciona para a listagem de categorias
            
 
-def clean_nome(self):
-    nome = self.cleaned_data.get('nome')
-    if len(nome) < 3:
-        raise forms.ValidationError("O nome deve ter pelo menos 3 caracteres.")
-    return nome  
-    
-def clean_cpf(self):
-    cpf = self.cleaned_data.get('cpf')
-    if cpf <= 0:
-        raise forms.ValidationError("O campo ordem deve ser maior que zero.")
-    return cpf
