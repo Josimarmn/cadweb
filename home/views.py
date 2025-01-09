@@ -4,6 +4,7 @@ from .forms import *
 from django.contrib import messages
 from .models import Categoria
 from .models import Cliente
+from .models import Produto
 
 def index(request):
     return render(request,'index.html')
@@ -51,11 +52,6 @@ def editar_categoria(request, id):
     return render(request, 'categoria/formulario.html', {'form': form,})
 
 
-from django.contrib import messages
-from django.shortcuts import redirect
-from .models import Categoria
-from .models import Cliente
-
 def remover_categoria(request, id):
     try:
         # Tenta obter a categoria com o id fornecido
@@ -84,7 +80,6 @@ def clean_ordem(self):
     if ordem <= 0:
         raise forms.ValidationError("O campo ordem deve ser maior que zero.")
     return ordem
-
 
 def cliente(request):
     contexto = {
@@ -145,5 +140,66 @@ def remover_cliente(request, id):
         messages.error(request, 'Registro não encontrado')
     
     return redirect('cliente')  # Redireciona para a listagem de categorias
+
+def produto(request):
+    contexto = {
+        'lista': Produto.objects.all().order_by('id'),
+    }
+    return render(request, 'produto/lista.html',contexto)
+
+
+def form_produto(request):
+    if request.method == 'POST':
+       form = ProdutoForm(request.POST) # instancia o modelo com os dados do form
+       if form.is_valid():# faz a validação do formulário
+            produto = form.save() # salva a instancia do modelo no banco de dados
+            messages.success(request, 'Operação realizada com sucesso!')
+            return redirect('produto') # redireciona para a listagem
+    else:# método é get, novo registro
+        form = ProdutoForm() # formulário vazio
+    contexto = {
+        'form':form,
+    }
+    return render(request, 'produto/form.html', contexto)
+
+
+def editar_produto(request, id):
+    try:
+        produto = Produto.objects.get(pk=id)
+    except Produto.DoesNotExist:
+        # Caso o registro não seja encontrado, exibe a mensagem de erro
+        messages.error(request, 'Registro não encontrado')
+        return redirect('produto')  # Redireciona para a listagem
+
+
+    if request.method == 'POST':
+        # combina os dados do formulário submetido com a instância do objeto existente, permitindo editar seus valores.
+        form = ProdutoForm(request.POST, instance=produto)
+        if form.is_valid():
+            produto = form.save() # save retorna o objeto salvo
+            messages.success(request, 'Operação realizada com Sucesso')
+            return redirect('produto')
+    else:
+        form = ProdutoForm(instance=produto)
+        
+    return render(request, 'produto/form.html', {'form': form,})
+
+
+from django.contrib import messages
+from django.shortcuts import redirect
+from .models import Produto
+
+def remover_produto(request, id):
+    try:
+        # Tenta obter a categoria com o id fornecido
+        produto = Produto.objects.get(pk=id)
+        produto.delete()  # Exclui a categoria encontrada
+        messages.success(request, 'Operação realizada com sucesso')  # Exibe mensagem de sucesso
+    except Produto.DoesNotExist:
+        # Caso o registro não seja encontrado, exibe a mensagem de erro
+        messages.error(request, 'Registro não encontrado')
+    
+    return redirect('produto')  # Redireciona para a listagem de categorias
            
+
 
