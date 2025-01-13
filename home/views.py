@@ -202,4 +202,7 @@ def remover_produto(request, id):
     return redirect('produto')  # Redireciona para a listagem de categorias
            
 
+def detalhes_produto(request, id):
+    produto = Produto.objects.get(pk=id)  
+    return render(request, 'produto/detalhes.html', {'produto':produto})
 
