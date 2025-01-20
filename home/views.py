@@ -245,3 +245,5 @@ def buscar_dados(request, app_modelo):
     dados = [{'id': obj.id, 'nome': obj.nome} for obj in resultados]
     return JsonResponse(dados, safe=False)
 
+def teste3(request):
+    return render(request, 'testes/teste3.html')
