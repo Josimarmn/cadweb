@@ -22,5 +22,7 @@ urlpatterns = [
     path('teste2/', views.teste2, name='teste2'),
     path('buscar_dados/<str:app_modelo>/', views.buscar_dados, name="buscar_dados"),
     path('teste3/', views.teste3, name='teste3'),
+    path('pedido', views.pedido, name='pedido'),
+    path('form_produto', views.form_produto, name="form_produto"),
 
 ]
