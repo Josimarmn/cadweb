@@ -23,6 +23,6 @@ urlpatterns = [
     path('buscar_dados/<str:app_modelo>/', views.buscar_dados, name="buscar_dados"),
     path('teste3/', views.teste3, name='teste3'),
     path('pedido', views.pedido, name='pedido'),
-    path('form_produto', views.form_produto, name="form_produto"),
+    path('novo_pedido/<int:id>', views.novo_pedido, name="novo_pedido"),
 
 ]

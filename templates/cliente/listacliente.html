@@ -27,7 +27,7 @@
             <td> {{item.cpf}}</td>
             <td> {{item.datanascimento}}</td>
             <td>
-                <button class="btn btn-info text-white btn-sm me-1" onclick="location.href='{% url 'editar_cliente' item.id %}'">Novo Pedido</button>
+                <button class="btn btn-info text-white btn-sm me-1" onclick="location.href='{% url 'novo_pedido'  item.id %}'">Novo Pedido</button>
 
                 <button class="btn btn-warning btn-sm me-1" onclick="location.href='{% url 'editar_cliente' item.id %}'">Editar</button>
 
