@@ -79,11 +79,6 @@ class Pedido(models.Model):
         total = sum(item.qtde * item.preco for item in self.itempedido_set.all())
         return total
     
-    @property    
-    def subtotal(self):
-        """Calcula o total de todos os itens no pedido, formatado como moeda local"""
-        subtotal = (item.qtde * item.preco for item in self.itempedido_set.all())
-        return subtotal
     
     @property
     def qtdeItens(self):
