@@ -65,13 +65,31 @@ class Pedido(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=NOVO)
 
     def __str__(self):
-            return f"Pedido {self.id} - Cliente: {self.cliente.nome} - Status: {self.get_status_display()}"
+        return f"Pedido {self.id} - Cliente: {self.cliente.nome} - Status: {self.get_status_display()}"
 
     @property
     def data_pedidof(self):
         if self.data_pedido:
             return self.data_pedido.strftime('%d/%m/%Y %H:%M')
         return None
+    
+    @property    
+    def total(self):
+        """Calcula o total de todos os itens no pedido, formatado como moeda local"""
+        total = sum(item.qtde * item.preco for item in self.itempedido_set.all())
+        return total
+    
+    @property    
+    def subtotal(self):
+        """Calcula o total de todos os itens no pedido, formatado como moeda local"""
+        subtotal = (item.qtde * item.preco for item in self.itempedido_set.all())
+        return subtotal
+    
+    @property
+    def qtdeItens(self):
+        """Conta a qtde de itens no pedido, """
+        return self.itempedido_set.count()  
+
 
 class ItemPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)

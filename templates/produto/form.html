@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 
-
 {% block titulo_conteudo %} Formulário de Produtos {% endblock titulo_conteudo %}
-
 
 {% block conteudo %} 
 <form method="post">
     {% csrf_token %}    
     {{ form.as_p }}
-
 
     <p>
         <label for="id_categoria_nome">Categoria:</label>
@@ -18,9 +15,7 @@
             id="id_categoria_nome" 
             data-url="{% url 'buscar_dados' 'home.Categoria' %}" 
             data-hidden="#id_categoria" >
-    </p>
-    
-
+    </p>   
 
     <fieldset class="fieldset">
         <label for="imagem">Imagem:</label>
@@ -31,44 +26,29 @@
             value="{{form.instance.img_base64}}" 
             name="img_base64">
 
-
         <input type="file" id="imagem" 
             name="imagem" 
             data-hidden="img_base64" 
             class="img_upload form-control" 
             accept="image/*"><br>
 
-
         <canvas class="canvas"  id="imageCanvas" width="200" height="200"></canvas><br>
-
 
     </fieldset>
 
-
     <p>
     
-</p>
-
+    </p>
 
     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
-
-
-
-
-    
-
-
+ 
 </form>
-
 
 {% endblock conteudo %}
 
-
 {% block javascript %}
+
 <script>
-
-
-
 
     $(document).ready(function() {
 
@@ -91,7 +71,6 @@
                 const reader = new FileReader();
                 reader.readAsDataURL(imagemInput); // Converte a imagem para base64
 
-
                 reader.onload = function() {
                     const imgBase64 = reader.result; // O resultado da conversão
                    
@@ -109,6 +88,5 @@
         });
     });
 </script>
-
 
 {% endblock javascript %}
