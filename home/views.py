@@ -267,9 +267,11 @@ def novo_pedido(request,id):
         return render(request, 'pedido/form.html',{'form': form,})
     else: # se for metodo post, salva o pedido.
         form = PedidoForm(request.POST)
-        if form.is_valid():
-            pedido = form.save()
-            return redirect('pedido')
+        # return redirect('pedido')
+
+       
+        return render('pedido')
+           
 
 #def detalhes_pedido(request, id):
   #  try:
@@ -295,6 +297,7 @@ def novo_pedido(request,id):
 def detalhes_pedido(request, id):
     try:
         pedido = Pedido.objects.get(pk=id)
+        
     except Pedido.DoesNotExist:
         # Caso o registro não seja encontrado, exibe a mensagem de erro
         messages.error(request, 'Registro não encontrado')
@@ -321,6 +324,7 @@ def detalhes_pedido(request, id):
         'pedido': pedido,
         'form': form,
     }
+
     return render(request, 'pedido/detalhes.html',contexto )
 
 def editar_item_pedido(request, id):

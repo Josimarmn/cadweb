@@ -67,6 +67,9 @@ class Pedido(models.Model):
     def __str__(self):
         return f"Pedido {self.id} - Cliente: {self.cliente.nome} - Status: {self.get_status_display()}"
 
+
+
+
     @property
     def data_pedidof(self):
         if self.data_pedido:
@@ -78,7 +81,7 @@ class Pedido(models.Model):
         """Calcula o total de todos os itens no pedido, formatado como moeda local"""
         total = sum(item.qtde * item.preco for item in self.itempedido_set.all())
         return total
-    
+
     
     @property
     def qtdeItens(self):
