@@ -371,3 +371,4 @@ def remover_item_pedido(request, id):
 
     # Redireciona de volta para a página de detalhes do pedido
     return redirect('detalhes_pedido', id=pedido_id)
+
