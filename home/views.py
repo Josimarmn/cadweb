@@ -297,8 +297,6 @@ def novo_pedido(request,id):
 
 
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
 from .models import Pedido, ItemPedido, Produto
 from .forms import ItemPedidoForm
 
