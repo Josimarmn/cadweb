@@ -333,24 +333,38 @@ def editar_item_pedido(request, id):
     except ItemPedido.DoesNotExist:
         # Caso o registro não seja encontrado, exibe a mensagem de erro
         messages.error(request, 'Registro não encontrado')
-        return redirect('detalhes_pedido', id=id)  # Redireciona para a listagem    
-    pedido = item_pedido.pedido # acessa o pedido diretamente do item
-    quantidade_anterior = item_pedido.qtde
-
+        return redirect('detalhes_pedido', id=id)
+         
+    pedido = item_pedido.pedido  # Acessa o pedido diretamente do item
+    quantidade_anterior = item_pedido.qtde  # Armazena a quantidade anterior
     if request.method == 'POST':
-        
         form = ItemPedidoForm(request.POST, instance=item_pedido)
         if form.is_valid():
-            item_pedido = form.save(commit=False) # commit=False retorna o objeto item_pedido vindo do form para fazermos modificações adicionais antes de salvá-la, colocar o preço do produto, verificar estoque.
+            item_pedido = form.save(commit=False)  # prepara a instância do item_pedido sem persistir ainda
             print(item_pedido.produto.id)
-        else:
-             messages.error(request, 'Erro ao adicionar produto')
-                  
+            # realizar aqui o tratamento do estoque
+            # Pegar a nova quantidade do item pedido
+            # Obtém o estoque atual do produto
+            # Verifica se há estoque suficiente para a nova quantidade
+            # Se não mostras msg Quantidade em estoque insuficiente para o produto.
+            # Se sim
+            # Pegar a quantidade anterior ao estoque
+            # Decrementa a nova quantidade do estoque
+            # Salva as alterações no estoque
+            # Salva o item do pedido após ajustar o estoque
+            item_pedido.save()
+            messages.success(request, 'Operação realizada com Sucesso')
+            return redirect('detalhes_pedido', id=pedido.id)
+    else:
+        form = ItemPedidoForm(instance=item_pedido)
+        
     contexto = {
         'pedido': pedido,
         'form': form,
+        'item_pedido': item_pedido,
     }
-    return render(request, 'pedido/detalhes.html',contexto )
+    return render(request, 'pedido/detalhes.html', contexto)
+
 
 def remover_item_pedido(request, id):
     try:
@@ -371,10 +385,6 @@ def remover_item_pedido(request, id):
 
     # Redireciona de volta para a página de detalhes do pedido
     return redirect('detalhes_pedido', id=pedido_id)
-
-
-
-
 
 
 def remover_pedido(request, id):
