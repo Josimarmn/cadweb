@@ -372,3 +372,19 @@ def remover_item_pedido(request, id):
     # Redireciona de volta para a página de detalhes do pedido
     return redirect('detalhes_pedido', id=pedido_id)
 
+
+
+
+
+
+def remover_pedido(request, id):
+    try:
+        # Tenta obter a categoria com o id fornecido
+        pedido = Pedido.objects.get(pk=id)
+        pedido.delete()  # Exclui a categoria encontrada
+        messages.success(request, 'Operação realizada com sucesso')  # Exibe mensagem de sucesso
+    except Pedido.DoesNotExist:
+        # Caso o registro não seja encontrado, exibe a mensagem de erro
+        messages.error(request, 'Registro não encontrado')
+    
+    return redirect('pedido')  # Redireciona para a listagem de categorias
