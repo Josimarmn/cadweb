@@ -267,8 +267,11 @@ def novo_pedido(request,id):
         return render(request, 'pedido/form.html',{'form': form,})
     else: # se for metodo post, salva o pedido.
         form = PedidoForm(request.POST)
-        # return redirect('pedido')       
-        return render('pedido')
+            
+        if form.is_valid():
+            pedido = form.save()
+            return redirect('pedido')
+        #return render('pedido')
            
 from .models import Pedido, ItemPedido, Produto
 from .forms import ItemPedidoForm
@@ -327,8 +330,7 @@ def detalhes_pedido(request, id):
 
     return render(request, 'pedido/detalhes.html', contexto)
 
-from .models import Pedido, ItemPedido, Produto
-from .forms import ItemPedidoForm
+
 
 def editar_item_pedido(request, id):
     try:
@@ -420,3 +422,25 @@ def remover_pedido(request, id):
         messages.error(request, 'Registro não encontrado')
     
     return redirect('pedido')  # Redireciona para a listagem de categorias
+
+def form_pagamento(request,id):
+    try:
+        pedido = Pedido.objects.get(pk=id)
+    except Pedido.DoesNotExist:
+        # Caso o registro não seja encontrado, exibe a mensagem de erro
+        messages.error(request, 'Registro não encontrado')
+        return redirect('pedido')  # Redireciona para a listagem    
+    
+    if request.method == 'POST':
+        form = PagamentoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Operação realizada com Sucesso')
+    # prepara o formulário para um novo pagamento
+    pagamento = Pagamento(pedido=pedido)
+    form = PagamentoForm(instance=pagamento)
+    contexto = {
+        'pedido': pedido,
+        'form': form,
+    }    
+    return render(request, 'pedido/pagamento.html',contexto)

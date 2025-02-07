@@ -109,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # definie o formato da data dd/mm/yyyy
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Fortaleza'
-DATE_FORMAT = 'd/m/Y'
 USE_I18N = True
 USE_TZ = False
 # formatação de números e valores monetários de acordo com a localização (localização regional) da aplicação.
