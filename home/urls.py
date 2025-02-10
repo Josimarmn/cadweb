@@ -1,5 +1,9 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
+from django.urls import path, include
+from django.contrib.auth.views import LoginView, LogoutView
+
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -29,5 +33,6 @@ urlpatterns = [
     path('editar_item_pedido/<int:id>/', views.editar_item_pedido, name='editar_item_pedido'),
     path('remover_pedido/<int:id>/',views.remover_pedido, name='remover_pedido'),
     path('form_pagamento/<int:id>/',views.form_pagamento, name='form_pagamento'),
+ 
 
 ]

@@ -124,3 +124,17 @@ class Pagamento(models.Model):
         if self.data_pgto:
             return self.data_pgto.strftime('%d/%m/%Y %H:%M')
         return None
+    
+    @property    
+    def pagamentos(self):
+        return Pagamento.objects.filter(pedido=self)    
+    
+    #Calcula o total de todos os pagamentos do pedido
+    @property
+    def total_pago(self):
+        total = sum(pagamento.valor for pagamento in self.pagamentos.all())
+        return total    
+    
+    @property
+    def debito(self):
+        return "implementar"

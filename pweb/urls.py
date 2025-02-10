@@ -14,10 +14,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
+
+from home import views
 
 urlpatterns = [
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'), # Defina a URL para o login
+    #path('logout/', LogoutView.as_view(next_page='login'), name='logout'),       # URL para logout  
+    path('logout/', views.logout_view, name='logout'),
+    
 ]
+
+
+
+#from django.urls import path
+#from . import views  # Caso precise de uma view para a página inicial
+
+

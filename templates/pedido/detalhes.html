@@ -18,7 +18,7 @@
 <form method="POST">
     {% csrf_token %}
     <p>
-     <label for="id_produto_nome">Produto:</label>    
+    <label for="id_produto_nome">Produto:</label>    
     <input type="text" class="form-control autocomplete" 
             id="id_produto_nome" 
             data-url="{% url 'buscar_dados' 'home.Produto' %}" 
