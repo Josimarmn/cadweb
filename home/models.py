@@ -137,4 +137,4 @@ class Pagamento(models.Model):
     
     @property
     def debito(self):
-        return "implementar"
+        return self.total_pago-self.total_pago

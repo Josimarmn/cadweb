@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
-
 {% block titulo_conteudo %} Registro de Pagamento {% endblock titulo_conteudo %}
-
 
 {% block conteudo %} 
 
 
 <p>
-    <label for="id_cliene">Pedido:</label>
+    <label for="id_cliente">Pedido:</label>
     <span class="form-control" >{{form.instance.pedido}}</span>
     
   </p>
@@ -18,12 +16,10 @@
    </p>
 
 
-
-
 <form method="post">
     {% csrf_token %}    
     {{ form.as_p }}
-    <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+    <button onclick="location='{% url 'form_pagamento' form.instance.pedido.id %}'" type="button" class="btn btn-primary btn-sm" type="submit">Salvar</button>
     <button type="button" onclick="location='{% url 'detalhes_pedido' form.instance.pedido.id %}'" class="btn btn-secondary btn-sm">Voltar</button>
 </form>
 
@@ -58,7 +54,7 @@
     Total do Pedido: {{ pedido.total}}
 </p>
 <p>
-    Total Pago: {{ pagamento.total }}
+    Total Pago: {{ pedido.total }}
 </p>
 <p>
     Débito: {{pedido.total}}

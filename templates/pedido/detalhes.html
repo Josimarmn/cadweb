@@ -67,17 +67,11 @@
         
         {% endfor %}
     </tbody>
-    <tbody>
-      <tr>
-        <td colspan="3">Total do Pedido: {{pedido.total}}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-</table>
 
+</table>
+<div>Total do Pedido: {{pedido.total}}</div>
+<div>Total Pago: {{pedido.total}}</div>
+<div>Débito: {{pedido.total}}</div>
 
 {% endblock conteudo %}
 
