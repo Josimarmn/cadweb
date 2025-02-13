@@ -120,4 +120,7 @@ class PagamentoForm(forms.ModelForm):
         self.fields['valor'].widget.is_localized = True 
 
     def clean_valor(self):
-        raise forms.ValidationError("O valor deve ser maior que zero.")
+        valor = self.cleaned_data.get('valor')
+        if valor <= 0:
+            raise forms.ValidationError("O campo valor deve ser maior que zero.")
+        return valor

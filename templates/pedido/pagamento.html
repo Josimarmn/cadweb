@@ -16,11 +16,12 @@
    </p>
 
 
-<form method="post">
-    {% csrf_token %}    
+   <form method="post">
+    {% csrf_token %}
     {{ form.as_p }}
-    <button onclick="location='{% url 'form_pagamento' form.instance.pedido.id %}'" type="button" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+    <button type="submit" class="btn btn-primary"> Salvar </button>
     <button type="button" onclick="location='{% url 'detalhes_pedido' form.instance.pedido.id %}'" class="btn btn-secondary btn-sm">Voltar</button>
+
 </form>
 
 <table class="table table-hover">
@@ -54,10 +55,10 @@
     Total do Pedido: {{ pedido.total}}
 </p>
 <p>
-    Total Pago: {{ pedido.total }}
+    Total Pago: {{ pedido.total_pago }}
 </p>
 <p>
-    Débito: {{pedido.total}}
+    Débito: {{pedido.debito}}
 </p>
 
 <hr>
