@@ -82,19 +82,13 @@ def detalhes_categoria(request, id):
     categoria = Categoria.objects.get(pk=id)  
     return render(request, 'categoria/detalhes.html', {'categoria':categoria})
 
-@login_required
-def clean_nome(self):
-    nome = self.cleaned_data.get('nome')
-    if len(nome) < 3:
-        raise forms.ValidationError("O nome deve ter pelo menos 3 caracteres.")
-    return nome  
 
-@login_required 
-def clean_ordem(self):
-    ordem = self.cleaned_data.get('ordem')
-    if ordem <= 0:
-        raise forms.ValidationError("O campo ordem deve ser maior que zero.")
-    return ordem
+#def clean_nome(self):
+#    nome = self.cleaned_data.get('nome')
+#    if len(nome) < 3:
+#        raise forms.ValidationError("O nome deve ter pelo menos 3 caracteres.")
+#    return nome  
+
 
 @login_required
 def cliente(request):
@@ -198,11 +192,6 @@ def editar_produto(request, id):
         form = ProdutoForm(instance=produto)
         
     return render(request, 'produto/form.html', {'form': form,})
-
-
-#from django.contrib import messages
-#from django.shortcuts import redirect
-#from .models import Produto
 
 @login_required
 def remover_produto(request, id):
@@ -308,7 +297,7 @@ def detalhes_pedido(request, id):
             item_pedido.preco = item_pedido.produto.preco  # Acessando o preço do produto
 
             # Tratamento de estoque
-            estoque=  Estoque.objects.get(produto=item_pedido.produto)
+            estoque =  Estoque.objects.get(produto=item_pedido.produto)
             # Verificar se há estoque suficiente
             if estoque.qtde < item_pedido.qtde:
                 messages.error(request, 'Quantidade insuficiente no estoque para este produto.')

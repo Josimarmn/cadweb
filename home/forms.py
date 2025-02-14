@@ -11,6 +11,11 @@ class CategoriaForm(forms.ModelForm):
             'nome':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}),
             'ordem':forms.NumberInput(attrs={'class': 'inteiro form-control', 'placeholder': ''}),
         }
+    def clean_ordem(self):
+        ordem = self.cleaned_data.get('ordem')
+        if ordem <= 0:
+            raise forms.ValidationError("O campo ordem deve ser maior que zero.")
+        return ordem
 
 class ClienteForm(forms.ModelForm):
     class Meta:
@@ -39,6 +44,7 @@ class ClienteForm(forms.ModelForm):
         if datanasc > date.today():
             raise forms.ValidationError("O campo data deve ser menor que a data atual.")
         return datanasc
+
 
 
 class ProdutoForm(forms.ModelForm):
