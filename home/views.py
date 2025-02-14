@@ -308,22 +308,19 @@ def detalhes_pedido(request, id):
             item_pedido.preco = item_pedido.produto.preco  # Acessando o preço do produto
 
             # Tratamento de estoque
-            produto = item_pedido.produto
-            quantidade_estoque = produto.estoque.qtde  # Quantidade atual no estoque
-            quantidade_solicitada = item_pedido.qtde  # Quantidade solicitada
-
+            estoque=  Estoque.objects.get(produto=item_pedido.produto)
             # Verificar se há estoque suficiente
-            if quantidade_estoque >= quantidade_solicitada:
-                # Decrementa o estoque
-                produto.estoque.qtde -= abs(quantidade_solicitada)
-                produto.estoque.save()  # Salva a atualização no estoque
-
-                # Salva o item do pedido
-                item_pedido.save()
-                messages.success(request, 'Produto adicionado com sucesso ao pedido.')
-            else:
-                # Se não houver estoque suficiente, exibe mensagem de erro
+            if estoque.qtde < item_pedido.qtde:
                 messages.error(request, 'Quantidade insuficiente no estoque para este produto.')
+                return redirect('detalhes_pedido', id=pedido.id)
+                # Decrementa o estoque
+            estoque.qtde -= item_pedido.qtde
+            estoque.save()  # Salva a atualização no estoque
+            item_pedido.pedido = pedido
+            item_pedido.preco = item_pedido.produto.preco
+            item_pedido.save()
+
+            messages.success(request, 'Item adicionado ao pedido com sucesso.')
 
         else:
             messages.error(request, 'Erro ao adicionar produto')
