@@ -46,7 +46,6 @@ class ClienteForm(forms.ModelForm):
         return datanasc
 
 
-
 class ProdutoForm(forms.ModelForm):
     class Meta:
         model = Produto
