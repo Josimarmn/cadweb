@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nota Fiscal</title>
+    <style>
+        table {
+          width: 100%;
+          table-layout: fixed; /* Faz a tabela ocupar todo o espaço e distribuir igualmente */
+        }
+        tr {
+            text-align: justify; /* Justifica o texto dentro das células */
+            justify-content: space-between;
+          }
+        td {
+          text-align: justify; /* Justifica o texto dentro das células */
+          justify-content: space-between;
+        }
+      </style>
 </head>
 <body>
-    <div>DANFE - Documento Auxiliar da Nota Fiscal Eletrônica
-        <div> CHAVE DE ACESSO: </div>
-        <div>
+    <div style="border: 2px solid black; padding: 10px; ">
+        <div style="display: flex; justify-content: center; align-items: center;">DANFE - Documento Auxiliar da Nota Fiscal Eletrônica
+        </div>
+        <div style="border: 1px solid black; padding: 10px; "> CHAVE DE ACESSO: </div>
+        <p></p>
+        <div style="border: 1px solid black; padding: 10px; ">
             <p>Destinatário: {{pedido.cliente.nome}}</p>
             <p>Data Nascimento: {{pedido.cliente.datanascimento}}</p>
             <p>CPF/CNPJ: {{pedido.cliente.cpf}}</p>
         </div>
-        <div>
+        <p></p>
+        <div style="border: 1px solid black; padding: 10px; ">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -30,8 +48,8 @@
                         <td>{{ item.id }}</td>
                         <td>{{ item.produto.nome }}</td>
                         <td>{{ item.qtde }}</td>
-                        <td>{{ item.produto.preco}}</td>
-                        <td>{{ item.subtotal}}</td>    
+                        <td>R$ {{ item.produto.preco}}</td>
+                        <td>R$ {{ item.subtotal}}</td>    
                         <td>
                         </td>         
                     </tr>
@@ -41,24 +59,31 @@
             
             </table>
         </div>
-        <div>
+        <p></p>
+        <div style="border: 1px solid black; padding: 10px; ">
             <table>
                 <tr>
                     <td>ICMS.......: R$ {{pedido.total_pago}}</td>
-                    <td>IPI.......: R$ {{pedido.total_pago}}</td>
+                    <td>IPI.............: R$ {{pedido.total_pago}}</td>
                 </tr>
                 <tr>
-                    <td>PIS.......: R$ {{pedido.total_pago}}</td>
+                    <td>PIS...........: R$ {{pedido.total_pago}}</td>
                     <td>COFINS....: R$ {{pedido.total_pago}}</td>
                 </tr>
             </table>
         </div>
-        <div>
+        <p></p>
+        <div style="border: 1px solid black; padding: 10px; ">
             <p>Total......: R$ {{pedido.total_pago}}</p>
             <p>Impostos...: R$ {{pedido.total_pago}}</p>
             <p>Valor Final: R$ {{pedido.total_pago}}</p>
         </div>
+        <div style="display: flex; justify-content: center; align-items: center;">Recebemos os produtos constantes nesta nota fiscal.</div>
     </div>
-    <div>Recebemos os produtos constantes nesta nota fiscal</div>
+    <p>   
+    </p>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button type="button" onclick="" class="btn btn-info btn-sm">Baixar Nota Fiscal em PDF</button>
+    </div>
 </body>
 </html>
