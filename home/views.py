@@ -11,6 +11,7 @@ from django.apps import apps
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
+
 def logout_view(request):
     logout(request)
     return redirect('login')
@@ -435,3 +436,15 @@ def form_pagamento(request,id):
         'form': form,
     }    
     return render(request, 'pedido/pagamento.html',contexto)
+
+def notafiscal(request,id):
+    try:
+        pedido = Pedido.objects.get(pk=id)
+    except Pedido.DoesNotExist:
+        # Caso o registro não seja encontrado, exibe a mensagem de erro
+        messages.error(request, 'Registro não encontrado')
+        return redirect('pedido')  # Redireciona para a listagem        
+    
+    # prepara o formulário para um novo pagamento
+  
+    return render(request, 'pedido/notafiscal.html',{'pedido':pedido})

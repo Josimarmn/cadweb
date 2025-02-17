@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota Fiscal</title>
+</head>
+<body>
+    <div>DANFE - Documento Auxiliar da Nota Fiscal Eletrônica
+        <div> CHAVE DE ACESSO: </div>
+        <div>
+            <p>Destinatário: {{pedido.cliente.nome}}</p>
+            <p>Data Nascimento: {{pedido.cliente.datanascimento}}</p>
+            <p>CPF/CNPJ: {{pedido.cliente.cpf}}</p>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Qtde</th>
+                        <th>Valor Unitário (R$)</th>
+                        <th>Total (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in pedido.itempedido_set.all %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.produto.nome }}</td>
+                        <td>{{ item.qtde }}</td>
+                        <td>{{ item.produto.preco}}</td>
+                        <td>{{ item.subtotal}}</td>    
+                        <td>
+                        </td>         
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            
+            </table>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>ICMS.......: R$ {{pedido.total_pago}}</td>
+                    <td>IPI.......: R$ {{pedido.total_pago}}</td>
+                </tr>
+                <tr>
+                    <td>PIS.......: R$ {{pedido.total_pago}}</td>
+                    <td>COFINS....: R$ {{pedido.total_pago}}</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <p>Total......: R$ {{pedido.total_pago}}</p>
+            <p>Impostos...: R$ {{pedido.total_pago}}</p>
+            <p>Valor Final: R$ {{pedido.total_pago}}</p>
+        </div>
+    </div>
+    <div>Recebemos os produtos constantes nesta nota fiscal</div>
+</body>
+</html>
