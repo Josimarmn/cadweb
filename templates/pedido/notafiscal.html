@@ -27,11 +27,11 @@
 </head>
 <body>
     <div style="border: 2px solid black; padding: 10px; ">
-        <div style="display: flex; justify-content: center; align-items: center;">DANFE - Documento Auxiliar da Nota Fiscal Eletrônica
+        <div style="display: flex; justify-content: center; align-items: center; font-weight: bold;">DANFE - Documento Auxiliar da Nota Fiscal Eletrônica
         </div>
-        <div style="border: 1px solid black; padding: 10px; "> CHAVE DE ACESSO: </div>
+        <div style="border: 1px solid black; padding: 10px; font-weight: bold;"> CHAVE DE ACESSO: </div>
         <p></p>
-        <div style="border: 1px solid black; padding: 10px; ">
+        <div style="border: 1px solid black; padding: 10px; font-weight: bold;">
             <p>Destinatário: {{pedido.cliente.nome}}</p>
             <p>Data Nascimento: {{pedido.cliente.datanascimento}}</p>
             <p>CPF/CNPJ: {{pedido.cliente.cpf}}</p>
@@ -65,7 +65,7 @@
         <p></p>
          
         <div style="border: 1px solid black; padding: 10px; ">
-            <div style="display: flex; justify-content: space-between;">                 
+            <div style="display: flex; justify-content: space-between; font-weight: bold;">                 
                 <div>
                     ICMS.......: R$ {{pedido.total_pago}}
                 </div>
@@ -73,7 +73,7 @@
                     IPI.............: R$ {{pedido.total_pago}}
                 </div>
             </div>
-            <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; justify-content: space-between; font-weight: bold;">
                 <div>
                     PIS...........: R$ {{pedido.total_pago}}
                 </div>
@@ -83,12 +83,12 @@
             </div>
         </div>
         <p></p>
-        <div style="border: 1px solid black; padding: 10px; ">
+        <div style="border: 1px solid black; padding: 10px; font-weight: bold;">
             <p>Total......: R$ {{pedido.total_pago}}</p>
             <p>Impostos...: R$ {{pedido.total_pago}}</p>
             <p>Valor Final: R$ {{pedido.total_pago}}</p>
         </div>
-        <div style="display: flex; justify-content: center; align-items: center;">Recebemos os produtos constantes nesta nota fiscal.</div>
+        <div style="display: flex; justify-content: center; align-items: center; font-weight: bold;">Recebemos os produtos constantes nesta nota fiscal.</div>
     </div>
     <p>   
     </p>
