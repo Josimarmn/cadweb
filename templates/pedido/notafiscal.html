@@ -63,14 +63,21 @@
             </table>
         </div>
         <p></p>
+         
         <div style="border: 1px solid black; padding: 10px; ">
-            <div >
-                <div style="justify-content: space-around;" >
+            <div style="display: flex; justify-content: space-between;">                 
+                <div>
                     ICMS.......: R$ {{pedido.total_pago}}
-                    IPI.............: R$ {{pedido.total_pago}}
                 </div>
                 <div>
+                    IPI.............: R$ {{pedido.total_pago}}
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div>
                     PIS...........: R$ {{pedido.total_pago}}
+                </div>
+                <div>
                     COFINS....: R$ {{pedido.total_pago}}
                 </div>
             </div>
