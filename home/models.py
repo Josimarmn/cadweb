@@ -138,4 +138,3 @@ class Pagamento(models.Model):
             return self.data_pgto.strftime('%d/%m/%Y %H:%M')
         return None
     
-    

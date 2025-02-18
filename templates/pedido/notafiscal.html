@@ -67,26 +67,26 @@
         <div style="border: 1px solid black; padding: 10px; ">
             <div style="display: flex; justify-content: space-between;">                 
                 <div>
-                    ICMS.......: R$ {{pedido.total_pago}}
+                    ICMS.......: R$ {{pedido.total}}
                 </div>
                 <div>
-                    IPI.............: R$ {{pedido.total_pago}}
+                    IPI.............: R$ {{pedido.total}}
                 </div>
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    PIS...........: R$ {{pedido.total_pago}}
+                    PIS...........: R$ {{pedido.total}}
                 </div>
                 <div>
-                    COFINS....: R$ {{pedido.total_pago}}
+                    COFINS....: R$ {{pedido.total}}
                 </div>
             </div>
         </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px;">
-            <p>Total......: R$ {{pedido.total}}</p>
-            <p>Impostos...: R$ {{pedido.total_pago}}</p>
-            <p>Valor Final: R$ {{pedido.total_pago}}</p>
+            <p>Total.........: R$ {{pedido.total}}</p>
+            <p>Impostos...: R$ {{pedido.total}}</p>
+            <p>Valor Final: R$ {{pedido.total}}</p>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">Recebemos os produtos constantes nesta nota fiscal.</div>
     </div>
@@ -95,5 +95,6 @@
     <div style="display: flex; justify-content: center; align-items: center;">
         <button type="button" onclick="" class="btn btn-info btn-sm">Baixar Nota Fiscal em PDF</button>
     </div>
+
 </body>
 </html>
