@@ -8,7 +8,12 @@
         table {
           width: 100%;
           table-layout: fixed; /* Faz a tabela ocupar todo o espaço e distribuir igualmente */
+          border-collapse: collapse;
         }
+        th {
+            background-color: #f2f2f2; /* Define uma cor de fundo clara para os cabeçalhos */
+            border: 1px solid black;
+          }
         tr {
             text-align: justify; /* Justifica o texto dentro das células */
             justify-content: space-between;
@@ -16,6 +21,7 @@
         td {
           text-align: justify; /* Justifica o texto dentro das células */
           justify-content: space-between;
+          border: 1px solid black;
         }
       </style>
 </head>
@@ -49,28 +55,25 @@
                         <td>{{ item.produto.nome }}</td>
                         <td>{{ item.qtde }}</td>
                         <td>R$ {{ item.produto.preco}}</td>
-                        <td>R$ {{ item.subtotal}}</td>    
-                        <td>
-                        </td>         
+                        <td>R$ {{ item.subtotal}}</td>           
                     </tr>
                     
                     {% endfor %}
-                </tbody>
-            
+                </tbody>            
             </table>
         </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px; ">
-            <table>
-                <tr>
-                    <td>ICMS.......: R$ {{pedido.total_pago}}</td>
-                    <td>IPI.............: R$ {{pedido.total_pago}}</td>
-                </tr>
-                <tr>
-                    <td>PIS...........: R$ {{pedido.total_pago}}</td>
-                    <td>COFINS....: R$ {{pedido.total_pago}}</td>
-                </tr>
-            </table>
+            <div >
+                <div style="justify-content: space-around;" >
+                    ICMS.......: R$ {{pedido.total_pago}}
+                    IPI.............: R$ {{pedido.total_pago}}
+                </div>
+                <div>
+                    PIS...........: R$ {{pedido.total_pago}}
+                    COFINS....: R$ {{pedido.total_pago}}
+                </div>
+            </div>
         </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px; ">
