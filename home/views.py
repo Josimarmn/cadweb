@@ -448,3 +448,4 @@ def notafiscal(request,id):
     # prepara o formulário para um novo pagamento
   
     return render(request, 'pedido/notafiscal.html',{'pedido':pedido})
+
