@@ -30,9 +30,9 @@
         <div style="border: 1px solid black; padding: 10px;"> CHAVE DE ACESSO: </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px;">
-            <p>Destinatário: {{pedido.cliente.nome}}</p>
-            <p>Data Nascimento: {{pedido.cliente.datanascimento}}</p>
-            <p>CPF/CNPJ: {{pedido.cliente.cpf}}</p>
+            <p><strong>Destinatário:</strong> {{pedido.cliente.nome}}</p>
+            <p><strong>Data Nascimento:</strong>{{pedido.cliente.datanascimento}}</p>
+            <p><strong>CPF/CNPJ:</strong> {{pedido.cliente.cpf}}</p>
         </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px; ">
@@ -65,26 +65,26 @@
         <div style="border: 1px solid black; padding: 10px; ">
             <div style="display: flex; justify-content: space-between;">                 
                 <div>
-                    ICMS.......: R$ {{pedido.total}}
+                    ICMS.......: R$ {{pedido.valor_icms}}
                 </div>
                 <div>
-                    IPI.............: R$ {{pedido.total}}
+                    IPI.............: R$ {{pedido.valor_ipi}}
                 </div>
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    PIS...........: R$ {{pedido.total}}
+                    PIS...........: R$ {{pedido.valor_pis}}
                 </div>
                 <div>
-                    COFINS....: R$ {{pedido.total}}
+                    COFINS....: R$ {{pedido.valor_confins}}
                 </div>
             </div>
         </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px;">
             <p>Total.........: R$ {{pedido.total}}</p>
-            <p>Impostos...: R$ {{pedido.total}}</p>
-            <p>Valor Final: R$ {{pedido.total}}</p>
+            <p>Impostos...: R$ {{pedido.valor_total_impostos}}</p>
+            <p>Valor Final: R$ {{pedido.valor_final}}</p>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">Recebemos os produtos constantes nesta nota fiscal.</div>
     </div>

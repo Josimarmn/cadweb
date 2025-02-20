@@ -1,4 +1,5 @@
 import locale
+from decimal import Decimal
 from django.db import models
 from datetime import date
 
@@ -63,6 +64,11 @@ class Pedido(models.Model):
     produtos = models.ManyToManyField(Produto, through='ItemPedido')
     data_pedido = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS_CHOICES, default=NOVO)
+    valor_total_impostos = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_icms = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_ipi = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_pis = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_confins = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"Pedido {self.id} - Cliente: {self.cliente.nome} - Status: {self.get_status_display()}"
@@ -99,6 +105,37 @@ class Pedido(models.Model):
     def debito(self):
         return self.total-self.total_pago
     
+
+
+    @property
+    def valor_icms(self):
+        icms = Decimal('0.18') * self.total
+        return icms.quantize(Decimal('0.01'))  # Arredonda para 2 casas decimais
+    
+    @property
+    def valor_ipi(self):
+        ipi = Decimal('0.05') * self.total
+        return ipi.quantize(Decimal('0.01'))  # Arredonda para 2 casas decimais
+    
+    @property
+    def valor_pis(self):
+        pis = Decimal('0.0165') * self.total
+        return pis.quantize(Decimal('0.01'))  # Arredonda para 2 casas decimais
+
+    @property
+    def valor_confins(self):
+        cofins = Decimal('0.076') * self.total
+        return cofins.quantize(Decimal('0.01'))  # Arredonda para 2 casas decimais
+
+    @property
+    def valor_total_impostos(self):
+        # Somando os valores dos impostos e arredondando o total
+        return (self.valor_icms + self.valor_ipi + self.valor_pis + self.valor_confins).quantize(Decimal('0.01'))
+    @property
+    def valor_final(self):
+        # Somando os valores dos impostos e arredondando o total
+        return (self.valor_icms + self.valor_ipi + self.valor_pis + self.valor_confins + self.total).quantize(Decimal('0.01'))
+
 class ItemPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
