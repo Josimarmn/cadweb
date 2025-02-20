@@ -7,7 +7,6 @@
     <style>
         table {
           width: 100%;
-          table-layout: fixed; /* Faz a tabela ocupar todo o espaço e distribuir igualmente */
           border-collapse: collapse;
         }
         th {
@@ -22,6 +21,8 @@
           border: 1px solid black;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
 </head>
 <body>
     <div style="border: 2px solid black; padding: 10px; ">
@@ -84,15 +85,34 @@
         <div style="border: 1px solid black; padding: 10px;">
             <p><strong>Total.........: R$</strong> {{pedido.total}}</p>
             <p><strong>Impostos...: R$</strong> {{pedido.valor_total_impostos}}</p>
-            <p><strong>Valor Final: R</strong> {{pedido.valor_final}}</p>
+            <p><strong>Valor Final: R$</strong> {{pedido.valor_final}}</p>
         </div>
-        <div style="display: flex; justify-content: center; align-items: center;">Recebemos os produtos constantes nesta nota fiscal.</div>
+        <div style="display: flex; justify-content: center; align-items: center; font-weight: bold;">Recebemos os produtos constantes nesta nota fiscal.</div>
     </div>
     <p>   
     </p>
     <div style="display: flex; justify-content: center; align-items: center;">
-        <button type="button" onclick="" class="btn btn-info btn-sm">Baixar Nota Fiscal em PDF</button>
+        <button type="button" onclick="baixarNotaFiscal()" class="btn btn-info btn-sm">Baixar Nota Fiscal em PDF</button>
     </div>
-
+    <script>
+        // Função para gerar o PDF
+        function baixarNotaFiscal() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+    
+            // Captura o conteúdo da página que você deseja transformar em PDF
+            const content = document.querySelector('body').innerHTML;
+    
+            // Adiciona o conteúdo HTML ao PDF
+            doc.html(content, {
+                callback: function (doc) {
+                    // Salva o arquivo PDF com o nome "nota_fiscal.pdf"
+                    doc.save('nota_fiscal.pdf');
+                },
+                x: 10, // Margem X
+                y: 10, // Margem Y
+            });
+        }
+    </script>
 </body>
 </html>
