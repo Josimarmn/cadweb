@@ -27,7 +27,7 @@
     <div style="border: 2px solid black; padding: 10px; ">
         <div style="display: flex; justify-content: center; align-items: center; font-weight: bold;">DANFE - Documento Auxiliar da Nota Fiscal Eletrônica
         </div>
-        <div style="border: 1px solid black; padding: 10px;"> CHAVE DE ACESSO: </div>
+        <div style="border: 1px solid black; padding: 10px;"><strong> CHAVE DE ACESSO:</strong> </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px;">
             <p><strong>Destinatário:</strong> {{pedido.cliente.nome}}</p>
@@ -65,26 +65,26 @@
         <div style="border: 1px solid black; padding: 10px; ">
             <div style="display: flex; justify-content: space-between;">                 
                 <div>
-                    ICMS.......: R$ {{pedido.valor_icms}}
+                    <strong>ICMS.......: R$</strong> {{pedido.valor_icms}}
                 </div>
                 <div>
-                    IPI.............: R$ {{pedido.valor_ipi}}
+                    <strong>IPI.............: R$</strong> {{pedido.valor_ipi}}
                 </div>
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    PIS...........: R$ {{pedido.valor_pis}}
+                <strong>PIS...........: R$</strong> {{pedido.valor_pis}}
                 </div>
                 <div>
-                    COFINS....: R$ {{pedido.valor_confins}}
+                <strong>COFINS....: R$</strong> {{pedido.valor_confins}}
                 </div>
             </div>
         </div>
         <p></p>
         <div style="border: 1px solid black; padding: 10px;">
-            <p>Total.........: R$ {{pedido.total}}</p>
-            <p>Impostos...: R$ {{pedido.valor_total_impostos}}</p>
-            <p>Valor Final: R$ {{pedido.valor_final}}</p>
+            <p><strong>Total.........: R$</strong> {{pedido.total}}</p>
+            <p><strong>Impostos...: R$</strong> {{pedido.valor_total_impostos}}</p>
+            <p><strong>Valor Final: R</strong> {{pedido.valor_final}}</p>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">Recebemos os produtos constantes nesta nota fiscal.</div>
     </div>
