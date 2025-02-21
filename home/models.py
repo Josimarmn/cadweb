@@ -77,15 +77,17 @@ class Pedido(models.Model):
     @property
     def chave_acesso(self):
         """
-        Gera uma chave de acesso única baseada no ID do pedido e na data do pedido.
+        Gera uma chave de acesso única baseada no ano, ID do pedido e um hash SHA-256.
         """
-        # Concatenando o ID do pedido e a data do pedido (formatada)
-        dados = f"{self.id}{self.data_pedido.strftime('%Y%m%d%H%M%S')}"
-        
+        # Concatenando o ano (do campo data_pedido) com o ID do pedido
+        ano = self.data_pedido.strftime('%Y')  # Pega o ano da data do pedido
+        dados = f"{ano}{self.id}"  # Concatenando ano e ID do pedido
+
         # Criando o hash SHA-256
         chave = hashlib.sha256(dados.encode('utf-8')).hexdigest()
 
-        return chave.upper()  # Retorna a chave em maiúsculas para padronizar
+        # Retorna a chave composta por ano + ID + hash
+        return f"{ano}{self.id}{chave.upper()}"  # Retorna em maiúsculas para padronizar
 
     @property
     def data_pedidof(self):
