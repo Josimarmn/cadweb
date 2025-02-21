@@ -2,6 +2,7 @@ import locale
 from decimal import Decimal
 from django.db import models
 from datetime import date
+import hashlib
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=100)
@@ -72,6 +73,19 @@ class Pedido(models.Model):
 
     def __str__(self):
         return f"Pedido {self.id} - Cliente: {self.cliente.nome} - Status: {self.get_status_display()}"
+
+    @property
+    def chave_acesso(self):
+        """
+        Gera uma chave de acesso única baseada no ID do pedido e na data do pedido.
+        """
+        # Concatenando o ID do pedido e a data do pedido (formatada)
+        dados = f"{self.id}{self.data_pedido.strftime('%Y%m%d%H%M%S')}"
+        
+        # Criando o hash SHA-256
+        chave = hashlib.sha256(dados.encode('utf-8')).hexdigest()
+
+        return chave.upper()  # Retorna a chave em maiúsculas para padronizar
 
     @property
     def data_pedidof(self):
