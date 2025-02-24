@@ -397,7 +397,6 @@ def remover_item_pedido(request, id):
     item_pedido.delete()
     messages.success(request, 'Operação realizada com Sucesso')
 
-
     # Redireciona de volta para a página de detalhes do pedido
     return redirect('detalhes_pedido', id=pedido_id)
 
@@ -449,3 +448,31 @@ def notafiscal(request,id):
   
     return render(request, 'pedido/notafiscal.html',{'pedido':pedido})
 
+def editar_item_pagamento(request, id):
+    try:
+        pagamento = Pagamento.objects.get(pk=id)
+    except Pagamento.DoesNotExist:
+        # Caso o pagamento não seja encontrado, exibe mensagem de erro
+        messages.error(request, 'Pagamento não encontrado')
+        return redirect('pedido')  # Redireciona para a listagem de pedidos
+
+    pedido = pagamento.pedido  # Acessa o pedido diretamente do pagamento
+
+    if request.method == 'POST':
+        form = PagamentoForm(request.POST, instance=pagamento)  # Preenche o formulário com o pagamento existente
+        if form.is_valid():
+            form.save()  # Salva o pagamento com as alterações
+            messages.success(request, 'Pagamento atualizado com sucesso')
+            return redirect('detalhes_pedido', id=pedido.id)  # Redireciona para a página de detalhes do pedido
+
+    else:
+        # Se for GET, apenas preenche o formulário com os dados existentes
+        form = PagamentoForm(instance=pagamento)
+
+    contexto = {
+        'pedido': pedido,
+        'form': form,
+        'pagamento': pagamento,  # Para acessar dados do pagamento, se necessário
+    }
+
+    return render(request, 'pedido/pagamento.html', contexto)
