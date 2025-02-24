@@ -476,3 +476,19 @@ def editar_item_pagamento(request, id):
     }
 
     return render(request, 'pedido/pagamento.html', contexto)
+
+def remover_item_pagamento(request, id):
+    try:
+        pagamento = Pagamento.objects.get(pk=id)
+    except Pagamento.DoesNotExist:
+        # Caso o pagamento não seja encontrado, exibe a mensagem de erro
+        messages.error(request, 'Pagamento não encontrado')
+        return redirect('detalhes_pedido', id=id)
+
+    pedido_id = pagamento.pedido.id  # Armazena o ID do pedido antes de remover o pagamento
+    # Remove o pagamento do pedido
+    pagamento.delete()
+    messages.success(request, 'Pagamento removido com sucesso')
+
+    # Redireciona de volta para a página de detalhes do pedido
+    return redirect('detalhes_pedido', id=pedido_id)
